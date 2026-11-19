@@ -106,6 +106,8 @@ PortContainer_0_BOARD_InitPeripherals:
 - options: {callFromInitBoot: 'true', coreID: M7_0}
 - pin_list:
   - {pin_num: '137', peripheral: SIUL2, signal: 'gpio, 0', pin_signal: PTA0, direction: INPUT/OUTPUT}
+  - {pin_num: '102', peripheral: CAN0, signal: can0_rx, pin_signal: PTA6}
+  - {pin_num: '100', peripheral: CAN0, signal: can0_tx, pin_signal: PTA7}
  * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS ***********
  */
 /* clang-format on */

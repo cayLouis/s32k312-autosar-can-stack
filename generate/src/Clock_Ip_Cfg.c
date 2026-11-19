@@ -298,7 +298,7 @@ static const Clock_Ip_SelectorConfigType Clock_Ip_SelectorConfigurations_0[CLOCK
     #if CLOCK_IP_CONFIGURED_SELECTORS_0_NO > 3U
     {
         FLEXCANA_CLK,                    /* Clock name associated to selector */
-        FIRC_CLK,                    /* Name of the selected input source */
+        AIPS_PLAT_CLK,                    /* Name of the selected input source */
     },
     #endif
 
@@ -438,7 +438,7 @@ static const Clock_Ip_DividerConfigType Clock_Ip_DividerConfigurations_0[CLOCK_I
     #if CLOCK_IP_CONFIGURED_DIVIDERS_0_NO > 10U
     {
         FLEXCANA_CLK,                    /* name */
-        2U,                              /* value */
+        1U,                              /* value */
         {
             0U,
         }
