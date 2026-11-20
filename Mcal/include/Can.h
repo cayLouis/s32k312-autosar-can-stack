@@ -8,6 +8,16 @@
 #ifndef INCLUDE_CAN_H_
 #define INCLUDE_CAN_H_
 
+#include "FlexCan_Ip.h"
+#include "Can_Mb.h"
+
+
+
+
+
+void Can_Init(void);
+
+void Can_MainFunction(void);
 
 
 #endif /* INCLUDE_CAN_H_ */
