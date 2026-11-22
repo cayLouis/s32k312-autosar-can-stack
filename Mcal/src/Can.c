@@ -8,9 +8,14 @@
 
 #include "Can.h"
 
-static Can_RingBuffer_t canRingBufferAccel;
+static Can_RingBuffer_t s_RxRingBuf; // 接收Buffer，对外不可见
+static Can_RingBuffer_t s_TxRingBuf; // 发送Buffer，对外不可见
 
 void Can_Init(void) {
+	// 初始化缓冲区
+	Can_RingBuffer_Init(&s_RxRingBuf);
+	Can_RingBuffer_Init(&s_TxRingBuf);
+
 	FlexCAN_Ip_Init(INST_FLEXCAN_0, &FlexCAN_State0, &FlexCAN_Config0);
 	FlexCAN_Ip_SetRxMaskType(INST_FLEXCAN_0, FLEXCAN_RX_MASK_INDIVIDUAL); // 配置为独立掩码模式
 
@@ -42,18 +47,5 @@ void FlexCAN0_CallBack(uint8 instance, Flexcan_Ip_EventType eventType,
                        uint32 buffIdx, const Flexcan_Ip_StateType *driverState) {
     (void)instance; (void)driverState;
     // 缓存报文数据，缓冲区如何设计？
-    if (FLEXCAN_EVENT_RX_COMPLETE == eventType) {
-        if (buffIdx == RX_MB_ACCEL_IDX) {
-        	FlexCAN_Ip_Receive(INST_FLEXCAN_0, RX_MB_ACCEL_IDX, &recvMsg, FALSE);
-        	canRxFlagAccel = 1U;
-        }
-        if (buffIdx == RX_MB_CMD_IDX) {
-        	FlexCAN_Ip_Receive(INST_FLEXCAN_0, RX_MB_CMD_IDX, &recvCmdMsg, FALSE);
-        	canRxFlagCmd = 1U;
-        }
-        if (buffIdx == RX_MB_SPEED_IDX) {
-        	FlexCAN_Ip_Receive(INST_FLEXCAN_0, RX_MB_SPEED_IDX, &recvSpeedMsg, FALSE);
-        	canRxFlagSpeed = 1U;
-        }
-    }
+    
 }
