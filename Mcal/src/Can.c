@@ -8,6 +8,8 @@
 
 #include "Can.h"
 
+static Can_RingBuffer_t canRingBufferAccel;
+
 void Can_Init(void) {
 	FlexCAN_Ip_Init(INST_FLEXCAN_0, &FlexCAN_State0, &FlexCAN_Config0);
 	FlexCAN_Ip_SetRxMaskType(INST_FLEXCAN_0, FLEXCAN_RX_MASK_INDIVIDUAL); // 配置为独立掩码模式
