@@ -11,6 +11,9 @@
 static Can_RingBuffer_t s_RxRingBuf; // 接收Buffer，对外不可见
 static Can_RingBuffer_t s_TxRingBuf; // 发送Buffer，对外不可见
 
+static uint32_t s_TxErrorCnt = 0;
+static uint32_t s_RxErrorCnt = 0;
+
 void Can_Init(void) {
 	// 初始化缓冲区
 	Can_RingBuffer_Init(&s_RxRingBuf);
@@ -45,7 +48,24 @@ void Can_Init(void) {
 
 void FlexCAN0_CallBack(uint8 instance, Flexcan_Ip_EventType eventType,
                        uint32 buffIdx, const Flexcan_Ip_StateType *driverState) {
-    (void)instance; (void)driverState;
+    (void)instance;
+    (void)driverState;
     // 缓存报文数据，缓冲区如何设计？
+    switch (eventType)
+    {
+    	case FLEXCAN_EVENT_RX_COMPLETE:
+    	{
+    		Flexcan_Ip_MsgBuffType rxFrame;
+    		Flexcan_Ip_StatusType status;
+
+    		status = FlexCAN_Ip_Receive(INST_FLEXCAN_0, buffIdx, &rxFrame, FALSE);
+    		if (status == FLEXCAN_STATUS_SUCCESS) {
+    			Can_RingBuffer_Push(&s_RxRingBuf, &rxFrame);
+    		} else {
+    			s_RxErrorCnt++;
+    		}
+    		break;
+    	}
+	}
     
 }
