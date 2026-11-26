@@ -15,5 +15,8 @@ void Can_RingBuffer_Init(Can_RingBuffer_t *ringBuffer);
 bool Can_RingBuffer_IsFull(const Can_RingBuffer_t *ringBuffer);
 bool Can_RingBuffer_IsEmpty(const Can_RingBuffer_t *ringBuffer);
 
+Std_ReturnType Can_RingBuffer_Push(Can_RingBuffer_t* rb, const Flexcan_Ip_MsgBuffType* frame);
+Std_ReturnType Can_RingBuffer_Pop(Can_RingBuffer_t* rb, const Flexcan_Ip_MsgBuffType* frame);
+
 
 #endif /* CAN_RINGBUFFER_H */

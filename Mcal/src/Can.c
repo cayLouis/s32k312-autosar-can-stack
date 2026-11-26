@@ -45,6 +45,18 @@ void Can_Init(void) {
 	FlexCAN_Ip_SetStartMode(INST_FLEXCAN_0); // 把FlexCAN 0实例从配置模式（冻结模式）切换到正常工作模式
 }
 
+void CAN_MainFunction_Read(void) {
+
+	Flexcan_Ip_MsgBuffType rxFrame;
+	PduInfoType pduInfo;
+
+	// 当环形缓冲区非空的时候
+	while (Can_RingBuffer_Pop(&s_RxRingBuf, &rxFrame) == E_OK) {
+		pduInfo.CanId =
+		CanIf_RxIndication(0, &pduInfo);
+	}
+}
+
 
 void FlexCAN0_CallBack(uint8 instance, Flexcan_Ip_EventType eventType,
                        uint32 buffIdx, const Flexcan_Ip_StateType *driverState) {

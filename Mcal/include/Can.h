@@ -11,6 +11,7 @@
 #include "FlexCan_Ip.h"
 #include "Can_Mb.h"
 #include "Can_RingBuffer.h"
+#include "CanIf.h"
 
 
 
@@ -18,7 +19,7 @@
 
 void Can_Init(void);
 
-void Can_MainFunction(void);
+void Can_MainFunction_Read(void);
 
 
 #endif /* INCLUDE_CAN_H_ */
