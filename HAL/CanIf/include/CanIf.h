@@ -9,7 +9,7 @@
 #define CANIF_INCLUDE_CANIF_H_
 #include "ComStack_Types.h"
 
-typedef void (*CanIf_RxCallback)(uint16_t PduId, const uint8_t* DataPtr, uint8_t Dlc)
+typedef void (*CanIf_RxCallback)(uint16_t PduId, const uint8_t* DataPtr, uint8_t Dlc);
 
 typedef struct {
 	uint16_t PduId; // 逻辑序号：PDU ID

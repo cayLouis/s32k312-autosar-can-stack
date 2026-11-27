@@ -72,7 +72,7 @@ void ReceiveTask( void *pvParameters )
 /**
 * @brief        Main function of the example
 * @details      Initializes the used drivers and uses 1 binary Semaphore and
-*               2 tasks to toggle a LED.er
+*               2 tasks to toggle a LED
 */
 int main(void)
 {

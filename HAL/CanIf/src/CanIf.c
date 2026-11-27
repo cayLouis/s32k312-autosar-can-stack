@@ -14,7 +14,16 @@ void CanIf_Init(void){
 }
 
 void CanIf_RxIndication(uint8_t HwChannel, const PduInfoType* pduInfo) {
-
+	// 遍历配置表
+	for (uint16_t i = 0; i < CanIf_PduConfigNum; i++)
+	{
+		// 回调
+		if (pduInfo->CanId == CanIf_PduConfigTable[i].CanId){
+			if (CanIf_PduConfigTable[i].RxCallback != NULL) {
+				CanIf_PduConfigTable[i].RxCallback(CanIf_PduConfigTable[i].PduId, pduInfo->DataPtr, pudInfo->Dlc);
+			}
+		}
+	}
 }
 
 
